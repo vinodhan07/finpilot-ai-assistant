@@ -2,61 +2,48 @@ import { FinancialCard } from "@/components/FinancialCard";
 import { ChatInterface } from "@/components/ChatInterface";
 import { AlertsPanel } from "@/components/AlertsPanel";
 import { ScenarioSimulator } from "@/components/ScenarioSimulator";
-import { Button } from "@/components/ui/button";
+import { Navigation } from "@/components/Navigation";
+import { FloatingChatbot } from "@/components/FloatingChatbot";
 import { 
   Wallet, 
   TrendingUp, 
   Home, 
-  CreditCard, 
-  Shield,
-  Sparkles,
-  User
+  CreditCard,
+  Activity,
+  DollarSign
 } from "lucide-react";
 
-const Index = () => {
+export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
-      {/* Header */}
-      <header className="border-b bg-card/80 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent">
-                <Sparkles className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">FinPilot</h1>
-                <p className="text-xs text-muted-foreground">AI Financial Assistant</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Shield className="h-4 w-4" />
-                <span>Secured</span>
-              </div>
-              <Button variant="ghost" size="sm">
-                <User className="h-4 w-4 mr-2" />
-                Priya
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
       <div className="container mx-auto px-4 py-6">
         {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-2">
-            Good morning, Priya! 👋
-          </h2>
-          <p className="text-muted-foreground">
-            Here's your financial overview and AI-powered insights.
-          </p>
+        <div className="mb-8 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground mb-2">
+                Good morning, Priya! 👋
+              </h1>
+              <p className="text-muted-foreground">
+                Here's your financial overview and AI-powered insights.
+              </p>
+            </div>
+            <div className="hidden md:flex items-center gap-3">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Portfolio Performance</p>
+                <p className="text-lg font-bold text-success">+8.2% ↗</p>
+              </div>
+              <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center">
+                <Activity className="h-6 w-6 text-success" />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Financial Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-scale-in">
           <FinancialCard
             title="Net Worth"
             amount="-₹90,000"
@@ -108,21 +95,43 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Footer */}
-        <footer className="mt-12 pt-8 border-t border-border">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4" />
-              <span>Your data is encrypted and never shared</span>
-            </div>
-            <div>
-              FinPilot AI © 2024 • Powered by Advanced Financial Analytics
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+            <div className="flex items-center gap-3">
+              <DollarSign className="h-8 w-8 text-primary" />
+              <div>
+                <p className="text-sm text-muted-foreground">Monthly Savings Rate</p>
+                <p className="text-xl font-bold text-primary">40%</p>
+              </div>
             </div>
           </div>
-        </footer>
+          
+          <div className="bg-success/5 border border-success/20 rounded-lg p-4">
+            <div className="flex items-center gap-3">
+              <TrendingUp className="h-8 w-8 text-success" />
+              <div>
+                <p className="text-sm text-muted-foreground">Investment Growth</p>
+                <p className="text-xl font-bold text-success">+12.5%</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-accent/5 border border-accent/20 rounded-lg p-4">
+            <div className="flex items-center gap-3">
+              <Home className="h-8 w-8 text-accent" />
+              <div>
+                <p className="text-sm text-muted-foreground">Loan Progress</p>
+                <p className="text-xl font-bold text-accent">27%</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      
+      <FloatingChatbot />
     </div>
   );
-};
+}
 
-export default Index;
+
